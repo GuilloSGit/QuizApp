@@ -1,0 +1,147 @@
+[
+
+    {
+        "question": "¿Cómo se llamaba la mamá de Jesús?",
+        "choice1": "Eugenia",
+        "choice2": "María",
+        "choice3": "Mariana",
+        "choice4": "Marta",
+        "answer": 2,
+        "__pregunta-nro__": "Pregunta 1"
+    },
+    {
+        "question": "¿Cómo se llamaba el papá de Jesús?",
+        "choice1": "Lucas",
+        "choice2": "Timoteo",
+        "choice3": "José",
+        "choice4": "Judas",
+        "answer": 3,
+        "__pregunta-nro__": "Pregunta 2"
+    },
+    {
+        "question": "¿Cómo se llamaba el hermano mayor de Jesús?",
+        "choice1": "Carlos",
+        "choice2": "Pablo",
+        "choice3": "Pedro",
+        "choice4": "No tenía hermano más grande",
+        "answer": 4,
+        "__pregunta-nro__": "Pregunta 3"
+    },   
+    {
+        "question": "¿Cuántos animales metió Noé al arca?",
+        "choice1": "Muchos",
+        "choice2": "Pocos",
+        "choice3": "Todos",
+        "choice4": "Ninguno",
+        "answer": 4,
+        "__pregunta-nro__": "Pregunta 4"
+    },   
+    {
+        "question": "¿Cómo se llamaba el abuelo de Jacob?",
+        "choice1": "Moises",
+        "choice2": "Abrahan",
+        "choice3": "Isaac",
+        "choice4": "Manases",
+        "answer": 2,
+        "__pregunta-nro__": "Pregunta 5"
+    },   
+    {
+        "question": "¿Cuántos años tenía Jesús cuando se le perdió a sus padres?",
+        "choice1": "12",
+        "choice2": "3",
+        "choice3": "18",
+        "choice4": "33",
+        "answer": 1,
+        "__pregunta-nro__": "Pregunta 6"
+    },
+    {
+        "question": "¿Cuántos libros tiene la Biblia?",
+        "choice1": "75",
+        "choice2": "66",
+        "choice3": "40",
+        "choice4": "Otra cantidad",
+        "answer": 2,
+        "__pregunta-nro__": "Pregunta 7"
+    },
+    {
+        "question": "¿En qué río fue bautizado Jesús?",
+        "choice1": "Jordán",
+        "choice2": "Éufrates",
+        "choice3": "Nilo",
+        "choice4": "Caraparí",
+        "answer": 1,
+        "__pregunta-nro__": "Pregunta 8"
+    },
+    {
+        "question": "¿Quién era Sansón?",
+        "choice1": "Era un rey",
+        "choice2": "Era un juez para Israel",
+        "choice3": "Era un discípulo de Jesús",
+        "choice4": "Era un soldado",
+        "answer": 2,
+        "__pregunta-nro__": "Pregunta 9"
+    },
+    {
+        "question": "¿Qué texto dice: `Cuando digan 'sí', que sea sí`?",
+        "choice1": "Mateo 5:3",
+        "choice2": "Juan 17:3",
+        "choice3": "Mateo 5:37",
+        "choice4": "Salmos 55:22",
+        "answer": 3,
+        "__pregunta-nro__": "Pregunta 10"
+    },
+    {
+        "question": "¿Qué mujer se convirtió en sal por pensar en las cosas materiales?",
+        "choice1": "Rahab",
+        "choice2": "Lea",
+        "choice3": "Esposa de Noé",
+        "choice4": "Esposa de Lot",
+        "answer": 4,
+        "__pregunta-nro__": "Pregunta 11"
+    },
+    {
+        "question": "¿Qué mujer se convirtió en sal por pensar en las cosas materiales?",
+        "choice1": "Rahab",
+        "choice2": "Lea",
+        "choice3": "Esposa de Lot",
+        "choice4": "Esposa de Noé",
+        "answer": 3,
+        "__pregunta-nro__": "Pregunta 12"
+    },
+    {
+        "question": "¿Por qué explicaba Jesús tan bien?",
+        "choice1": "Porque fue a una buena Universidad",
+        "choice2": "Porque le enseñó Jehová",
+        "choice3": "Porque era inteligente",
+        "choice4": "Porque estudiaba",
+        "answer": 2,
+        "__pregunta-nro__": "Pregunta 13"
+    },
+    {
+        "question": "¿Quiénes escribieron partes de la Biblia?",
+        "choice1": "Rut, Orpá y Noemí",
+        "choice2": "Saúl, Jonatán y Obed",
+        "choice3": "Moisés, Salomón, Amós",
+        "choice4": "Epafrodito, Nicolás, Bernabé",
+        "answer": 2,
+        "__pregunta-nro__": "Pregunta 14"
+    },
+    {
+        "question": "¿Quiénes escribieron partes de la Biblia?",
+        "choice1": "Rut, Orpá y Noemí",
+        "choice2": "Saúl, Jonatán y Obed",
+        "choice3": "Moisés, Salomón, Amós",
+        "choice4": "Epafrodito, Nicolás, Bernabé",
+        "answer": 3,
+        "__pregunta-nro__": "Pregunta 14"
+    },
+    {
+        "question": "¿Quién fue el profeta que estuvo mucho tiempo con Elías?",
+        "choice1": "Miqueas",
+        "choice2": "Zacarías",
+        "choice3": "Amós",
+        "choice4": "Eliseo",
+        "answer": 4,
+        "__pregunta-nro__": "Pregunta 15"
+    }
+]
