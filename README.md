@@ -1,5 +1,9 @@
 # Aplicación de Preguntas de la Biblia para niños
+---
+## Cómo usar la aplicación
 
+> Puedes hacer clic <a href="https://guillosgit.github.io/QuizApp/"><b>aquí</b></a>. 
+> También puedes ver el repositorio <a href="https://github.com/GuilloSGit/QuizApp"><b>aquí en GitHub</b></a>.
 ---
 ## Detalles de la aplicación:
 
@@ -18,7 +22,7 @@
 
 > Sería bueno, en próximas ediciones, aumentar la seguridad mediante una db para que el usuario no pueda alterar el puntaje.
 > Agregar animaciones / frames / colores, aplicando las @media correspondientes para bloquear comportamientos no deseados según las decisiones del usuario.
-----
+---
 ## Detalles de la concreción del proyecto
 
 > Logrado en 2 jornadas de aproximadamente 5 horas cada una.
@@ -32,10 +36,7 @@
 > Pero por lo pronto, esto es lo que se pudo hacer.
 
 ---
-## Cómo usar la aplicación
 
-> Puedes hacer clic <a href="https://"><b>aquí</b></a>
-----
 ## Si llegaste hasta acá...
 
 > Gracias por leer...
