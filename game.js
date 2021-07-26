@@ -46,7 +46,7 @@ getNewQuestion = () => {
 
         localStorage.setItem('mostRecentScore', score)
         /* va a la página final */
-        return window.location.assign("/QuizApp/end.html")
+        return window.location.assign("QuizApp/end.html")
     }
     
     questionCounter++
