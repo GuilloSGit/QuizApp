@@ -100,11 +100,11 @@
         "__pregunta-nro__": "Pregunta 11"
     },
     {
-        "question": "¿Qué mujer se convirtió en sal por pensar en las cosas materiales?",
-        "choice1": "Rahab",
-        "choice2": "Lea",
-        "choice3": "Esposa de Lot",
-        "choice4": "Esposa de Noé",
+        "question": "¿Qué rey era esposo de la malvada Jezabel?",
+        "choice1": "Saúl",
+        "choice2": "Amán",
+        "choice3": "Acab",
+        "choice4": "Gog",
         "answer": 3,
         "__pregunta-nro__": "Pregunta 12"
     },
@@ -123,17 +123,17 @@
         "choice2": "Saúl, Jonatán y Obed",
         "choice3": "Moisés, Salomón, Amós",
         "choice4": "Epafrodito, Nicolás, Bernabé",
-        "answer": 2,
+        "answer": 3,
         "__pregunta-nro__": "Pregunta 14"
     },
     {
-        "question": "¿Quiénes escribieron partes de la Biblia?",
-        "choice1": "Rut, Orpá y Noemí",
-        "choice2": "Saúl, Jonatán y Obed",
-        "choice3": "Moisés, Salomón, Amós",
-        "choice4": "Epafrodito, Nicolás, Bernabé",
-        "answer": 3,
-        "__pregunta-nro__": "Pregunta 14"
+        "question": "¿Cuántas tribus formaban la nación de Israel?",
+        "choice1": "11",
+        "choice2": "12",
+        "choice3": "13",
+        "choice4": "14",
+        "answer": 2,
+        "__pregunta-nro__": "Pregunta 15"
     },
     {
         "question": "¿Quién fue el profeta que estuvo mucho tiempo con Elías?",
@@ -142,6 +142,6 @@
         "choice3": "Amós",
         "choice4": "Eliseo",
         "answer": 4,
-        "__pregunta-nro__": "Pregunta 15"
+        "__pregunta-nro__": "Pregunta 16"
     }
 ]
