@@ -99,11 +99,13 @@ h3 {
   background-color: white;
 }
 
-.btn:hover {
-  cursor: pointer;
-  box-shadow: 0 0.4rem 0 rgba(86, 185, 235, 0.5);
-  transform: translateY(-0.1rem);
-  transition: transform 180ms;
+@media screen and (min-width: 900px) {
+  .btn:hover {
+    cursor: pointer;
+    box-shadow: 0 0.4rem 0 rgba(86, 185, 235, 0.5);
+    transform: translateY(-0.1rem);
+    transition: transform 180ms;
+  }
 }
 
 .btn[disabled]:hover {
