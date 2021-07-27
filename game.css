@@ -7,13 +7,6 @@
   background-color: white;
 }
 
-.choice-container:hover {
-  cursor: pointer;
-  box-shadow: 0 0.4rem 0 rgba(112, 196, 238, 0.5);
-  transform: translateY(-0.1rem);
-  transition: transform 180ms;
-}
-
 .choice-prefix {
   padding: 1.5rem 2.5rem;
   background-color: #56a5eb;
@@ -89,5 +82,14 @@
   .choice-prefix{
     font-size: smaller;
     padding: 1.2rem;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .choice-container:hover {
+    cursor: pointer;
+    box-shadow: 0 0.4rem 0 rgba(112, 196, 238, 0.5);
+    transform: translateY(-0.1rem);
+    transition: transform 180ms;
   }
 }
