@@ -1,43 +1,78 @@
-# Aplicación de Preguntas de la Biblia para niños
+# 🎮 QuizApp JavaScript básico
+
+<div align="center">
+  <img src="https://img.shields.io/badge/JavaScript-100%25-yellow" alt="JavaScript 100%">
+  <img src="https://img.shields.io/badge/CSS3-100%25-blue" alt="CSS3 100%">
+  <img src="https://img.shields.io/badge/HTML5-100%25-orange" alt="HTML5 100%">
+  <img src="https://img.shields.io/badge/No%20Frameworks-100%25%20Vanilla-brightgreen" alt="100% Vanilla">
+</div>
+
+## 📱 Demo en Vivo
+
+[![Jugar Ahora](https://img.shields.io/badge/🎮-Jugar_Ahora-8A2BE2?style=for-the-badge&logo=gamejolt&logoColor=white)](https://guillosgit.github.io/QuizApp/)
+
+## ✨ Características Destacadas
+
+- 🎨 **Interfaz limpia y amigable**
+- ⚡ **Rendimiento óptimo** sin dependencias externas
+- 📱 **Diseño responsive** que funciona en cualquier dispositivo
+- 🎯 **Sistema de puntuación** con retroalimentación inmediata
+- 🔄 **Animaciones suaves** sin afectar el rendimiento
+- 🎨 **Temas de colores** cuidadosamente seleccionados
+
+## 🛠️ Construido con Vanilla JS
+
+> *"Claro, es posible hacerlo sin frameworks, sin librerías, pero cuesta un montón."*
+
+Este proyecto es un testimonio de lo que se puede lograr con JavaScript puro, HTML y CSS. Sin frameworks, sin dependencias, solo código nativo.
+
+## 🚀 Tecnologías Utilizadas
+
+- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
+- **Arquitectura**: Componentes puros en Vanilla JS
+- **Estilos**: CSS puro con animaciones nativas
+- **Control de Versiones**: Git y GitHub
+
+## 📦 Instalación Local
+
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/GuilloSGit/QuizApp.git
+   ```
+2. Abre el archivo `index.html` en tu navegador
+3. ¡Listo para arrancar!
+
+## 🎮 Cómo Usarlo
+
+1. Haz clic en "Comenzar Juego"
+2. Lee cada pregunta atentamente
+3. Selecciona la respuesta correcta
+4. Obtén la mayor puntuación posible
+5. ¡Comparte tu puntuación con amigos!
+
+## 🎨 Diseño y Accesibilidad
+
+- Contraste óptimo para mejor legibilidad
+- Tamaños de fuente accesibles
+- Navegación por teclado
+- Sin animaciones molestas o parpadeos
+
+## 🤝 Contribuciones
+
+¡Las contribuciones son bienvenidas! Siéntete libre de abrir un issue o enviar un pull request.
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+
+## �� Agradecimientos
+
+- A la comunidad de desarrolladores por su apoyo constante
+- A mis profesores y mentores por su paciencia
+- A ti, por probar este proyecto
+
 ---
-## Cómo usar la aplicación
 
-> Puedes hacer clic <a href="https://guillosgit.github.io/QuizApp/"><b>aquí</b></a>. 
-> También puedes ver el repositorio <a href="https://github.com/GuilloSGit/QuizApp"><b>aquí en GitHub</b></a>.
----
-## Detalles de la aplicación:
-
-> Creada con HTML, CSS y Javascript.
-> Las funciones de Javascript, cumplen cada una con lo necesario.
-
----
-## Sobre los recursos visuales y la UX/UI
-
-> Tiene (esta versión) pocos recursos visuales, porque quería enfocarme en que tuviera una funcionalidad.
-> Se le incorporó un loader spinner para que le dé tiempo al navegador hasta cargar la pregunta del JSON.
-> Los colores usados son pocos y los contrastes altos.
-> No contiene tanta animación, por  lo tanto no genera afectos nocivos a personas con sensibilidad a los movimientos o despliegues bruscos.
----
-## Detalles para mejorar
-
-> Sería bueno, en próximas ediciones, aumentar la seguridad mediante una db para que el usuario no pueda alterar el puntaje.
-> Agregar animaciones / frames / colores, aplicando las @media correspondientes para bloquear comportamientos no deseados según las decisiones del usuario.
----
-## Detalles de la concreción del proyecto
-
-> Logrado en 2 jornadas de aproximadamente 5 horas cada una.
-> Dispuesto para acceso público, para que otros puedan acceder, forkear, recrear y distribuir (cuando aprenda a poner licencias, añadiré el Creative Commons).
----
-
-## Punto de vista personal
-
-> Me siento feliz, porque son indicios de mis progresos. Sé que hay mucha gente capaz que puede hacer cosas impresionantes, y mucho mejor que este proyecto.
-> Ojalá, con el tiempo pueda mejorar, independizarme más, hacer cosas más propias (menos googleadas), menos copiadas.
-> Pero por lo pronto, esto es lo que se pudo hacer.
-
----
-
-## Si llegaste hasta acá...
-
-> Gracias por leer...
-> Gracias porque seguro te interesan mis "pasitos"...
+<div align="center">
+  Hecho con ❤️ por <a href="https://github.com/GuilloSGit">Guillermo Andrada</a>
+</div>
