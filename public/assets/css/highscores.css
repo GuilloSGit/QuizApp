@@ -1,0 +1,290 @@
+/* Estilos generales */
+#highScores {
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    padding: 2rem 0;
+}
+
+/* Estilos del contenedor de confeti */
+.container {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+/* Estilos del podio */
+.podium-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 1.5rem;
+    margin: 3rem 0 4rem;
+    position: relative;
+    z-index: 2;
+}
+
+.podium-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 1.5rem 1rem;
+    width: 150px;
+}
+
+.podium-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Primer lugar */
+.first-place {
+    height: 220px;
+    background: linear-gradient(135deg, #ffd700, #ffc400);
+    z-index: 3;
+}
+
+/* Segundo lugar */
+.second-place {
+    height: 180px;
+    background: linear-gradient(135deg, #c0c0c0, #a0a0a0);
+    z-index: 2;
+}
+
+/* Tercer lugar */
+.third-place {
+    height: 160px;
+    background: linear-gradient(135deg, #cd7f32, #b87333);
+    z-index: 1;
+}
+
+.podium-avatar {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.podium-details {
+    text-align: center;
+    color: #333;
+}
+
+.podium-name {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.podium-score {
+    display: block;
+    font-size: 1.2rem;
+    color: #555;
+    font-weight: 600;
+}
+
+/* Lista de otros puntajes */
+.other-scores {
+    width: 100%;
+    max-width: 500px;
+    margin: 2rem auto 3rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    position: relative;
+    z-index: 2;
+}
+
+.other-scores h3 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.other-scores h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, #3498db, #9b59b6);
+    border-radius: 3px;
+}
+
+.scores-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.score-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    margin: 0.5rem 0;
+    background: #f8f9fa;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border-left: 4px solid #3498db;
+}
+
+.score-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.score-item .position {
+    font-weight: 700;
+    color: #7f8c8d;
+    min-width: 40px;
+}
+
+.score-item .name {
+    flex-grow: 1;
+    margin: 0 1rem;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.score-item .points {
+    font-weight: 700;
+    color: #e74c3c;
+    background: rgba(231, 76, 60, 0.1);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+/* Efectos de confeti mejorados */
+.confetti-container {
+    position: fixed;
+    top: -50px;
+    left: 0;
+    width: 100%;
+    height: calc(100% + 100px);
+    pointer-events: none;
+    z-index: 10;
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+}
+
+.confetti {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: #f39c12;
+    opacity: 0.9;
+    border-radius: 1px;
+    animation: fall linear forwards;
+    transform-style: preserve-3d;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    will-change: transform, opacity;
+}
+
+/* Animación de caída con movimiento ondulante */
+@keyframes fall {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(calc(100vh + 100px)) translateX(calc((var(--drift-x) * 1px) + var(--random-x) * 100px)) rotate(calc(var(--rotation) * 1deg));
+        opacity: 0;
+    }
+}
+
+/* Estilos para diferentes formas de confeti */
+.confetti.square {
+    border-radius: 2px;
+}
+
+.confetti.circle {
+    border-radius: 50%;
+}
+
+.confetti.triangle {
+    width: 0;
+    height: 0;
+    background: transparent;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 10px solid currentColor;
+}
+
+/* Animaciones */
+@keyframes bounceIn {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.05); opacity: 1; }
+    70% { transform: scale(0.95); }
+    100% { transform: scale(1); }
+}
+
+.first-place { animation: bounceIn 0.8s ease-out; }
+.second-place { animation: bounceIn 0.8s 0.2s ease-out both; }
+.third-place { animation: bounceIn 0.8s 0.4s ease-out both; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .podium-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .podium-item {
+        flex-direction: row;
+        width: 80%;
+        height: 80px !important;
+        padding: 1rem;
+    }
+    
+    .podium-avatar {
+        margin: 0 1rem 0 0;
+        font-size: 2.5rem;
+    }
+    
+    .podium-details {
+        text-align: left;
+    }
+    
+    .other-scores {
+        width: 90%;
+    }
+}
+
+/* Efecto de brillo en el primer lugar */
+.first-place::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%);
+    z-index: -1;
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.first-place:hover::after {
+    opacity: 1;
+}

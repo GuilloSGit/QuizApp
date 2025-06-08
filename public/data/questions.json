@@ -1,5 +1,4 @@
 [
-
     {
         "question": "¿Cómo se llamaba la mamá de Jesús?",
         "choice1": "Eugenia",
@@ -26,16 +25,16 @@
         "choice4": "No tenía hermano más grande",
         "answer": 4,
         "__pregunta-nro__": "Pregunta 3"
-    },   
+    },
     {
         "question": "¿Cuántos animales metió Noé al arca?",
         "choice1": "Muchos",
         "choice2": "Pocos",
         "choice3": "Todos",
-        "choice4": "Ninguno",
+        "choice4": "Macho y hembra de cada especie",
         "answer": 4,
         "__pregunta-nro__": "Pregunta 4"
-    },   
+    },
     {
         "question": "¿Cómo se llamaba el abuelo de Jacob?",
         "choice1": "Moises",
@@ -44,7 +43,7 @@
         "choice4": "Manases",
         "answer": 2,
         "__pregunta-nro__": "Pregunta 5"
-    },   
+    },
     {
         "question": "¿Cuántos años tenía Jesús cuando se le perdió a sus padres?",
         "choice1": "12",
@@ -143,5 +142,68 @@
         "choice4": "Eliseo",
         "answer": 4,
         "__pregunta-nro__": "Pregunta 16"
+    },
+    {
+        "question": "¿De qué libro es la historia de Lot?",
+        "choice1": "Génesis",
+        "choice2": "Éxodo",
+        "choice3": "Levítico",
+        "choice4": "Números",
+        "answer": 1,
+        "__pregunta-nro__": "Pregunta 17"
+    },
+    {
+        "question": "¿A qué rey le dijeron 'No debes ir con ellos'",
+        "choice1": "David",
+        "choice2": "Salomón",
+        "choice3": "Acab",
+        "choice4": "Saúl",
+        "answer": 4,
+        "__pregunta-nro__": "Pregunta 18"
+    },
+    {
+        "question": "¿Dónde recibió Moisés los Diez Mandamientos?",
+        "choice1": "Monte Hermón",
+        "choice2": "Monte Sinaí",
+        "choice3": "Monte de los Olivos",
+        "choice4": "Monte Carmelo",
+        "answer": 2,
+        "__pregunta-nro__": "Pregunta 19"
+    },
+    {
+        "question": "¿Dónde recibió Moisés los Diez Mandamientos?",
+        "choice1": "Monte Hermón",
+        "choice2": "Monte de los Olivos",
+        "choice3": "Monte Carmelo",
+        "choice4": "Monte Sinaí",
+        "answer": 2,
+        "__pregunta-nro__": "Pregunta 20"
+    },
+    {
+        "question": "¿Qué profeta fue tragado por un gran pez?",
+        "choice1": "Pablo",
+        "choice2": "Elías",
+        "choice3": "Jonás",
+        "choice4": "Jeremías",
+        "answer": 1,
+        "__pregunta-nro__": "Pregunta 21"
+    },
+    {
+        "question": "¿Qué profeta fue tragado por un gran pez?",
+        "choice1": "Jonás",
+        "choice2": "Elías",
+        "choice3": "Jeremías",
+        "choice4": "Pablo",
+        "answer": 1,
+        "__pregunta-nro__": "Pregunta 22"
+    },
+    {
+        "question": "¿Cuál es el primer libro de la Biblia?",
+        "choice1": "Apocalipsis",
+        "choice2": "Levítico",
+        "choice3": "Éxodo",
+        "choice4": "Génesis",
+        "answer": 4,
+        "__pregunta-nro__": "Pregunta 23"
     }
 ]

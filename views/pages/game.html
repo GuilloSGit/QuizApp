@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Juego de preguntas rápidas">
+    <meta name="keywords" content="Juego, preguntas, rápidas">
+    <meta name="author" content="Guillermo Andrada">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#56a5eb">
+
+    <link rel="icon" type="image/svg+xml" href="/public/assets/images/thinking.svg">
+    <link rel="apple-touch-icon" href="/public/assets/images/thinking.svg">
+    <link rel="manifest" href="/public/assets/img/manifest.json">
+
+    <title>Preguntas rápidas</title>
+    <link rel="stylesheet" href="/public/assets/css/style.css">
+    <link rel="stylesheet" href="/public/assets/css/game.css">
+</head>
+
+<body>
+    <div class="container">
+        <div id="loader"></div>
+        <div id="game" class="justify-center flex-column hidden">
+            <div id="back-home" style="margin-bottom: 2rem;">
+                <button id="leaveGameBtn" class="btn leave-game">
+                    <img src="/public/assets/images/back.svg" alt="Volver">
+                    Volver
+                </button>
+            </div>
+            
+            <!-- Diálogo de confirmación -->
+            <div id="confirmDialog" class="modal">
+                <div class="modal-content">
+                    <h3>¿Estás seguro que quieres salir?</h3>
+                    <p style="color: white;">Si sales ahora, perderás todo tu progreso y puntos.</p>
+                    <div class="modal-actions">
+                        <button id="confirmLeave" class="btn btn-danger">Sí, salir</button>
+                        <button id="cancelLeave" class="btn">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+            <div id="hud">
+                <div id="hud-item">
+                    <p id="progressText" class="hud-prefix"></p>
+                    <div id="progressBar">
+                        <div id="progressBarFull"></div>
+                    </div>
+                </div>
+                <div id="hud-item">
+                    <p class="hud-prefix">
+                        Puntos
+                    </p>
+                    <h1 class="hud-main-text" id="score">
+                        0
+                    </h1>
+                </div>
+            </div>
+            <h2 id="question" class="question"></h2>
+            <div class="choice-container">
+                <p class="choice-prefix">A</p>
+                <p class="choice-text" data-number="1"></p>
+            </div>
+            <div class="choice-container">
+                <p class="choice-prefix">B</p>
+                <p class="choice-text" data-number="2"></p>
+            </div>
+            <div class="choice-container">
+                <p class="choice-prefix">C</p>
+                <p class="choice-text" data-number="3"></p>
+            </div>
+            <div class="choice-container">
+                <p class="choice-prefix">D</p>
+                <p class="choice-text" data-number="4"></p>
+            </div>
+        </div>
+    </div>
+    <script src="/public/assets/js/game.js"></script>
+    <script>
+        // Manejar el diálogo de confirmación para salir del juego
+        document.addEventListener('DOMContentLoaded', () => {
+            const leaveBtn = document.getElementById('leaveGameBtn');
+            const confirmDialog = document.getElementById('confirmDialog');
+            const confirmLeave = document.getElementById('confirmLeave');
+            const cancelLeave = document.getElementById('cancelLeave');
+            
+            // Mostrar diálogo al hacer clic en el botón de volver
+            leaveBtn.addEventListener('click', () => {
+                confirmDialog.style.display = 'flex';
+            });
+            
+            // Confirmar salida
+            confirmLeave.addEventListener('click', () => {
+                window.location.href = '/index.html';
+            });
+            
+            // Cancelar salida
+            cancelLeave.addEventListener('click', () => {
+                confirmDialog.style.display = 'none';
+            });
+            
+            // Cerrar al hacer clic fuera del diálogo
+            window.addEventListener('click', (e) => {
+                if (e.target === confirmDialog) {
+                    confirmDialog.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
