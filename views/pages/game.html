@@ -24,10 +24,7 @@
     <div class="container">
         <div id="loader"></div>
         <div id="game" class="justify-center flex-column hidden">
-            <!-- Botón de volver usando el componente -->
-            <div id="back-home" style="margin-bottom: 2rem;" data-component="back-button" data-href="/index.html"></div>
-            
-            <!-- Diálogo de confirmación usando el componente -->
+            <div id="back-home" data-component="back-button" data-href="/index.html"></div>
             <div id="confirmDialog" 
                  data-component="confirm-dialog"
                  data-title="¿Estás seguro que quieres salir?"
@@ -76,11 +73,15 @@
     <script type="module" src="/public/assets/js/app.js"></script>
     <!-- Importar el juego -->
     <script type="module" src="/public/assets/js/game.js"></script>
-    <script>
-      // Forzar la inicialización de la aplicación si no se ha hecho
-      if (typeof initApp === 'function') {
-        initApp();
-      }
+    <script type="module">
+      // Esperar a que todo esté listo
+      document.addEventListener('DOMContentLoaded', () => {
+        if (window.initApp && typeof window.initApp === 'function') {
+          window.initApp();
+        } else {
+          console.warn('initApp no está disponible');
+        }
+      });
     </script>
 </body>
 

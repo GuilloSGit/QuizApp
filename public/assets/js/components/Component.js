@@ -75,11 +75,32 @@ class Component {
    * Monta el componente en el DOM
    */
   mount() {
-    if (this.isMounted) return;
+    if (!this.element) {
+      console.error('No se puede montar el componente: elemento no encontrado');
+      return this;
+    }
+
+    try {
+      // Guardar el contenido original para referencia
+      const originalContent = this.element.innerHTML.trim();
+      
+      // Renderizar el componente
+      const renderedContent = this.render();
+      
+      // Solo actualizar el contenido si es necesario
+      if (renderedContent !== undefined && renderedContent !== null) {
+        this.element.innerHTML = renderedContent;
+      }
+      
+      this.isMounted = true;
+      
+      // Llamar al hook de ciclo de vida
+      this.componentDidMount();
+    } catch (error) {
+      console.error('Error al montar el componente:', this.constructor.name, error);
+    }
     
-    this.update();
-    this.isMounted = true;
-    this.componentDidMount();
+    return this;
   }
 
   /**

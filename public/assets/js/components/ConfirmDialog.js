@@ -6,8 +6,8 @@ class ConfirmDialog extends window.Component {
     return `
       <div class="modal" id="${this.props.id}">
         <div class="modal-content">
-          <h3>${this.props.title || '¿Estás seguro?'}</h3>
-          <p style="color: white;">${this.props.message || 'Esta acción no se puede deshacer.'}</p>
+          <h4 style="color: #000; font-size: 1.2rem">${this.props.title || '¿Estás seguro?'}</h4>
+          <p style="color: #000; font-size: 1.2rem">${this.props.message || 'Esta acción no se puede deshacer.'}</p>
           <div class="modal-actions">
             <button id="confirmBtn" class="btn btn-danger" data-ref="confirmBtn">
               ${this.props.confirmText || 'Confirmar'}
@@ -22,25 +22,58 @@ class ConfirmDialog extends window.Component {
   }
 
   componentDidMount() {
+    // Asegurarse de que el diálogo tenga el HTML necesario
+    this.element.innerHTML = `
+      <div class="modal-content">
+        <h4 style="color: #000; font-size: 1.2rem">${this.props.title || '¿Estás seguro?'}</h4>
+        <p style="color: #000; font-size: 1.2rem">${this.props.message || '¿Deseas continuar?'}</p>
+        <div class="modal-actions">
+          <button class="btn btn-cancel" data-ref="cancelBtn">
+            ${this.props.cancelText || 'Cancelar'}
+          </button>
+          <button class="btn btn-confirm" data-ref="confirmBtn">
+            ${this.props.confirmText || 'Aceptar'}
+          </button>
+        </div>
+      </div>
+    `;
+    
+    // Asegurarse de que el diálogo esté oculto inicialmente
+    this.element.style.display = 'none';
+    
+    // Configurar referencias a los botones
     this.confirmBtn = this.element.querySelector('[data-ref="confirmBtn"]');
     this.cancelBtn = this.element.querySelector('[data-ref="cancelBtn"]');
     
+    // Configurar manejadores de eventos
     if (this.confirmBtn) {
-      this.confirmBtn.addEventListener('click', this.handleConfirm.bind(this));
+      this.handleConfirmBound = this.handleConfirm.bind(this);
+      this.confirmBtn.addEventListener('click', this.handleConfirmBound);
+    } else {
+      console.warn('No se encontró el botón de confirmar');
     }
     
     if (this.cancelBtn) {
-      this.cancelBtn.addEventListener('click', this.handleCancel.bind(this));
+      this.handleCancelBound = this.handleCancel.bind(this);
+      this.cancelBtn.addEventListener('click', this.handleCancelBound);
+    } else {
+      console.warn('No se encontró el botón de cancelar');
     }
     
     // Cerrar al hacer clic fuera del diálogo
-    if (this.element) {
-      this.element.addEventListener('click', (e) => {
-        if (e.target === this.element) {
-          this.hide();
-        }
-      });
-    }
+    this.handleClickOutside = (e) => {
+      if (e.target === this.element) {
+        this.hide();
+      }
+    };
+    
+    this.element.addEventListener('click', this.handleClickOutside);
+    
+    // Hacer que el diálogo esté disponible globalmente
+    window.confirmDialogInstance = this;
+    
+    // Ocultar el diálogo por defecto
+    this.hide();
   }
   
   componentWillUnmount() {
@@ -53,11 +86,46 @@ class ConfirmDialog extends window.Component {
   }
 
   show() {
-    this.element.style.display = 'flex';
+    if (this.element) {
+      // Asegurarse de que el elemento sea visible
+      this.element.style.display = 'flex';
+      // Forzar un reflow para que la animación funcione
+      void this.element.offsetWidth;
+      // Aplicar la clase show para la animación
+      this.element.classList.add('show');
+      
+      // Enfocar el botón de cancelar por defecto para mejor accesibilidad
+      if (this.cancelBtn) {
+        setTimeout(() => {
+          this.cancelBtn.focus();
+        }, 100);
+      }
+    } else {
+      console.warn('No se puede mostrar el diálogo: elemento no encontrado');
+    }
   }
 
   hide() {
-    this.element.style.display = 'none';
+    if (this.element) {
+      // Primero quitamos la clase para la animación
+      this.element.classList.remove('show');
+      // Esperamos a que termine la animación para ocultar el elemento
+      setTimeout(() => {
+        if (this.element) {
+          this.element.style.display = 'none';
+        }
+      }, 300); // Debe coincidir con la duración de la transición CSS
+    } else {
+      console.warn('No se puede ocultar el diálogo: elemento no encontrado');
+    }
+  }
+
+  confirm() {
+    this.handleConfirm();
+  }
+
+  cancel() {
+    this.handleCancel();
   }
 
   handleConfirm() {
