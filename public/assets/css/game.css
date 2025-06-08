@@ -20,10 +20,14 @@
 
 .correct {
   background-color: #28a745;
+  border: 0.1rem solid #045e19;
+  animation: border-pulse 1s infinite;
 }
 
 .incorrect {
   background-color: #dc3545;
+  border: 0.1rem solid #6c1e1b;
+  animation: border-pulse 1s infinite;
 }
 
 /* HUD */
@@ -79,6 +83,18 @@
 
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes border-pulse {
+  0% {
+    box-shadow: 3 0 0 0 rgba(255, 255, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
   }
 }
 

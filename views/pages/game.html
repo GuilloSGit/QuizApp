@@ -24,23 +24,18 @@
     <div class="container">
         <div id="loader"></div>
         <div id="game" class="justify-center flex-column hidden">
-            <div id="back-home" style="margin-bottom: 2rem;">
-                <button id="leaveGameBtn" class="btn leave-game">
-                    <img src="/public/assets/images/back.svg" alt="Volver">
-                    Volver
-                </button>
-            </div>
+            <!-- Botón de volver usando el componente -->
+            <div id="back-home" style="margin-bottom: 2rem;" data-component="back-button" data-href="/index.html"></div>
             
-            <!-- Diálogo de confirmación -->
-            <div id="confirmDialog" class="modal">
-                <div class="modal-content">
-                    <h3>¿Estás seguro que quieres salir?</h3>
-                    <p style="color: white;">Si sales ahora, perderás todo tu progreso y puntos.</p>
-                    <div class="modal-actions">
-                        <button id="confirmLeave" class="btn btn-danger">Sí, salir</button>
-                        <button id="cancelLeave" class="btn">Cancelar</button>
-                    </div>
-                </div>
+            <!-- Diálogo de confirmación usando el componente -->
+            <div id="confirmDialog" 
+                 data-component="confirm-dialog"
+                 data-title="¿Estás seguro que quieres salir?"
+                 data-message="Si sales ahora, perderás todo tu progreso y puntos."
+                 data-confirm-text="Sí, salir"
+                 data-cancel-text="Cancelar"
+                 data-confirm-action="navigate"
+                 data-href="/index.html">
             </div>
             <div id="hud">
                 <div id="hud-item">
@@ -77,37 +72,15 @@
             </div>
         </div>
     </div>
-    <script src="/public/assets/js/game.js"></script>
+    <!-- Importar el sistema de componentes -->
+    <script type="module" src="/public/assets/js/app.js"></script>
+    <!-- Importar el juego -->
+    <script type="module" src="/public/assets/js/game.js"></script>
     <script>
-        // Manejar el diálogo de confirmación para salir del juego
-        document.addEventListener('DOMContentLoaded', () => {
-            const leaveBtn = document.getElementById('leaveGameBtn');
-            const confirmDialog = document.getElementById('confirmDialog');
-            const confirmLeave = document.getElementById('confirmLeave');
-            const cancelLeave = document.getElementById('cancelLeave');
-            
-            // Mostrar diálogo al hacer clic en el botón de volver
-            leaveBtn.addEventListener('click', () => {
-                confirmDialog.style.display = 'flex';
-            });
-            
-            // Confirmar salida
-            confirmLeave.addEventListener('click', () => {
-                window.location.href = '/index.html';
-            });
-            
-            // Cancelar salida
-            cancelLeave.addEventListener('click', () => {
-                confirmDialog.style.display = 'none';
-            });
-            
-            // Cerrar al hacer clic fuera del diálogo
-            window.addEventListener('click', (e) => {
-                if (e.target === confirmDialog) {
-                    confirmDialog.style.display = 'none';
-                }
-            });
-        });
+      // Forzar la inicialización de la aplicación si no se ha hecho
+      if (typeof initApp === 'function') {
+        initApp();
+      }
     </script>
 </body>
 
