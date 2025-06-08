@@ -11,20 +11,20 @@
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#56a5eb">
 
-    <link rel="icon" type="image/svg+xml" href="/public/assets/images/thinking.svg">
-    <link rel="apple-touch-icon" href="/public/assets/images/thinking.svg">
-    <link rel="manifest" href="/public/assets/img/manifest.json">
+    <link rel="icon" type="image/svg+xml" href="../../assets/images/thinking.svg">
+    <link rel="apple-touch-icon" href="../../assets/images/thinking.svg">
+    <link rel="manifest" href="../../assets/img/manifest.json">
 
     <title>Preguntas rápidas</title>
-    <link rel="stylesheet" href="/public/assets/css/style.css">
-    <link rel="stylesheet" href="/public/assets/css/game.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/game.css">
 </head>
 
 <body>
     <div class="container">
         <div id="loader"></div>
         <div id="game" class="justify-center flex-column hidden">
-            <div id="back-home" data-component="back-button" data-href="/index.html"></div>
+            <div id="back-home" data-component="back-button" data-href="../../index.html"></div>
             <div id="confirmDialog" 
                  data-component="confirm-dialog"
                  data-title="¿Estás seguro que quieres salir?"
@@ -69,8 +69,8 @@
             </div>
         </div>
     </div>
-    <script type="module" src="/public/assets/js/app.js"></script>
-    <script type="module" src="/public/assets/js/game.js"></script>
+    <script type="module" src="../../assets/js/app.js"></script>
+    <script type="module" src="../../assets/js/game.js"></script>
     <script type="module">
       document.addEventListener('DOMContentLoaded', () => {
         if (window.initApp && typeof window.initApp === 'function') {

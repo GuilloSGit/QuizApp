@@ -1,0 +1,4 @@
+title: QuizApp
+theme: jekyll-theme-cayman
+plugins: [jekyll-paginate]
+exclude: [node_modules, vendor, Gemfile, Gemfile.lock, README.md, _config.yml, .gitignore]

@@ -17,9 +17,9 @@ let availableQuestions = [];
 let questions = [];
 
 function initGame() {
-    fetch('/public/data/questions.json')
-        .then(res => res.json())
-        .then(loadedQuestions => {
+    fetch('../data/questions.json')
+            .then(res => res.json())
+            .then(loadedQuestions => {
             questions = loadedQuestions;
             startGame();
         })

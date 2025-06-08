@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/public/assets/css/style.css">
-    <link rel="stylesheet" href="/public/assets/css/highscores.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/highscores.css">
 
-    <link rel="icon" type="image/svg+xml" href="/public/assets/images/thinking.svg">
-    <link rel="apple-touch-icon" href="/public/assets/images/thinking.svg">
-    <link rel="manifest" href="/public/assets/img/manifest.json">
+    <link rel="icon" type="image/svg+xml" href="../../assets/images/thinking.svg">
+    <link rel="apple-touch-icon" href="../../assets/images/thinking.svg">
+    <link rel="manifest" href="../../assets/img/manifest.json">
 
     <meta name="description" content="Juego de preguntas rápidas">
     <meta name="keywords" content="Juego, preguntas, rápidas">
@@ -64,79 +64,14 @@
                 </ul>
             </div>
             
-            <a href="/public/index.html" class="btn">Inicio</a>
+            <a href="../../index.html" class="btn">Inicio</a>
             
             <!-- Elementos decorativos de papelitos -->
             <div class="confetti-container"></div>
         </div>
     </div>
     <div id="custom-cursor"></div>
-    <script src="/public/assets/js/highscores.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const cursor = document.getElementById('custom-cursor');
-            let mouseX = 0;
-            let mouseY = 0;
-            let cursorX = 0;
-            let cursorY = 0;
-            const centerX = window.innerWidth / 2;
-            let isCursorVisible = false;
-            
-            // Función para actualizar la posición del cursor
-            function updateCursor() {
-                // Suavizar el movimiento del cursor
-                cursorX += (mouseX - cursor.offsetWidth / 2 - cursorX) * 0.2;
-                cursorY += (mouseY - cursor.offsetHeight / 2 - cursorY) * 0.2;
-                
-                // Aplicar la posición
-                cursor.style.left = cursorX + 'px';
-                cursor.style.top = cursorY + 'px';
-                
-                // Calcular la rotación basada en la posición X del mouse
-                const rotation = (mouseX - centerX) / 30;
-                cursor.style.transform = `rotate(${rotation}deg)`;
-                
-                // Continuar la animación
-                requestAnimationFrame(updateCursor);
-            }
-            
-            // Mostrar el cursor personalizado
-            function showCursor() {
-                if (!isCursorVisible) {
-                    cursor.style.display = 'block';
-                    cursor.style.opacity = '1';
-                    isCursorVisible = true;
-                }
-            }
-            
-            // Mover el cursor
-            document.addEventListener('mousemove', function(e) {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-                showCursor();
-            });
-            
-            // Efecto de clic
-            document.addEventListener('mousedown', function() {
-                cursor.classList.add('cursor-click');
-            });
-            
-            document.addEventListener('mouseup', function() {
-                cursor.classList.remove('cursor-click');
-                
-                // Disparar confeti si la función existe
-                if (typeof window.createConfettiBurst === 'function') {
-                    window.createConfettiBurst(30);
-                }
-            });
-            
-            // Iniciar la animación
-            updateCursor();
-            
-            // Asegurarse de que el cursor se muestre al cargar
-            showCursor();
-        });
-    </script>
+    <script src="../../assets/js/highscores.js"></script>
 </body>
 
 </html>
