@@ -32,7 +32,7 @@
                  data-confirm-text="Sí, salir"
                  data-cancel-text="Cancelar"
                  data-confirm-action="navigate"
-                 data-href="/index.html">
+                 data-href="/public/index.html">
             </div>
             <div id="hud">
                 <div id="hud-item">
@@ -69,17 +69,12 @@
             </div>
         </div>
     </div>
-    <!-- Importar el sistema de componentes -->
     <script type="module" src="/public/assets/js/app.js"></script>
-    <!-- Importar el juego -->
     <script type="module" src="/public/assets/js/game.js"></script>
     <script type="module">
-      // Esperar a que todo esté listo
       document.addEventListener('DOMContentLoaded', () => {
         if (window.initApp && typeof window.initApp === 'function') {
           window.initApp();
-        } else {
-          console.warn('initApp no está disponible');
         }
       });
     </script>
