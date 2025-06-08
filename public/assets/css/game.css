@@ -268,27 +268,29 @@
 }
 
 .modal-actions .btn-confirm {
-  background-color: #fc3917;
-  color: white;
-  box-shadow: 0 4px 0 #e32b06;
-  border-bottom: 4px solid #e32b06;
+  background-color: #fefefe;
+  color: #2d3436;
+  box-shadow: 0 4px 0 #d8d8d8;
+  border-bottom: 4px solid #ffffff;
 }
 
 .modal-actions .btn-confirm:hover {
-  background-color: #e32b06;
+  background-color: #fcfcfc;
   transform: translateY(2px);
-  box-shadow: 0 2px 0 #e32b06;
+  box-shadow: 0 2px 0 #d8d8d8;
+  border: 0.2 solid #b0b0b0;
 }
 
 .modal-actions .btn-cancel {
-  background-color: #019ae7;
-  color: white;
-  box-shadow: 0 4px 0 #89d5ea;
-  border-bottom: 4px solid #00a2cf;
+  background-color: #dfdfdf;
+  color: #2d3436;
+  box-shadow: 0 4px 0 #cdcdcd;
+  border-bottom: 4px solid #e4e4e4;
 }
 
 .modal-actions .btn-cancel:hover {
-  background-color: #4cb1e4;
+  background-color: #ffffff;
   transform: translateY(2px);
-  box-shadow: 0 2px 0 #89d5ea;
+  box-shadow: 0 2px 0 #e1e1e1;
+  border: 0.2px solid #e1e1e1;
 }
