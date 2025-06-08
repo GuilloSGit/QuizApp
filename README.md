@@ -65,10 +65,9 @@ Este proyecto es un testimonio de lo que se puede lograr con JavaScript puro, HT
 
 Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
 
-## �� Agradecimientos
+## ✌️ Agradecimientos
 
-- A la comunidad de desarrolladores por su apoyo constante
-- A mis profesores y mentores por su paciencia
+- A la comunidad de desarrolladores
 - A ti, por probar este proyecto
 
 ---
