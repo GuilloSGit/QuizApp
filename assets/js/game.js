@@ -1,4 +1,4 @@
-const MAX_QUESTIONS = 10;
+const MAX_QUESTIONS = 1;
 const CORRECT_BONUS = 10;
 
 const question = document.getElementById('question');
@@ -17,17 +17,32 @@ let availableQuestions = [];
 let questions = [];
 
 function initGame() {
-    fetch('../data/questions.json')
-            .then(res => res.json())
-            .then(loadedQuestions => {
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    const basePath = isLocal ? '' : '/QuizApp';
+    const questionsPath = isLocal ? 
+        '../../assets/data/questions.json' : 
+        `${basePath}/assets/data/questions.json`;
+    
+    fetch(questionsPath)
+        .then(res => {
+            if (!res.ok) {
+                throw new Error('No se pudieron cargar las preguntas');
+            }
+            return res.json();
+        })
+        .then(loadedQuestions => {
             questions = loadedQuestions;
             startGame();
         })
         .catch(err => {
+            console.error('Error al cargar las preguntas:', err);
             const errorMessage = document.createElement('div');
             errorMessage.className = 'error-message';
             errorMessage.textContent = 'Error al cargar las preguntas. Por favor, recarga la página.';
             document.body.appendChild(errorMessage);
+            // Ocultar el loader si hay un error
+            const loader = document.getElementById('loader');
+            if (loader) loader.classList.add('hidden');
         });
 }
 
@@ -43,7 +58,12 @@ function startGame() {
 function getNewQuestion() {
     if (availableQuestions.length === 0 || questionCounter >= MAX_QUESTIONS) {
         localStorage.setItem('mostRecentScore', score);
-        return window.location.assign("/views/pages/end.html");
+        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const basePath = isLocal ? '' : '/QuizApp';
+        const endPagePath = isLocal ? 
+            '/views/pages/end.html' : 
+            `${basePath}/views/pages/end.html`;
+        return window.location.assign(endPagePath);
     }
 
     questionCounter++;

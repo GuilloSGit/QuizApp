@@ -29,67 +29,78 @@ window.createConfettiBurst = function(amount = 15) {
 
 // Función para crear un solo confeti con movimiento realista
 function createConfetti() {
-    const confetti = document.createElement('div');
-    
-    // Tipos de confeti (cuadrado, círculo o triángulo)
-    const types = ['square', 'circle', 'triangle'];
-    const type = types[Math.floor(Math.random() * types.length)];
-    confetti.className = `confetti ${type}`;
-    
-    // Posición aleatoria en la parte superior de la pantalla (incluyendo fuera de la vista)
-    const posX = (Math.random() * (window.innerWidth + 200)) - 100;
-    
-    // Tamaño aleatorio
-    const size = Math.random() * 12 + 6; // Entre 6px y 18px
-    
-    // Color aleatorio
-    const color = confettiColors[Math.floor(Math.random() * confettiColors.length)];
-    
-    // Variables para la animación
-    const driftX = (Math.random() - 0.5) * 200; // Movimiento horizontal aleatorio
-    const rotation = (Math.random() - 0.5) * 360; // Rotación inicial entre -180 y 180 grados
-    const randomX = (Math.random() - 0.5) * 2; // Movimiento horizontal aleatorio adicional
-    
-    // Establecer estilos
-    confetti.style.left = `${posX}px`;
-    confetti.style.top = '0';
-    confetti.style.width = type !== 'triangle' ? `${size}px` : '0';
-    confetti.style.height = type !== 'triangle' ? `${size}px` : '0';
-    
-    if (type === 'triangle') {
-        confetti.style.borderLeft = `${size/2}px solid transparent`;
-        confetti.style.borderRight = `${size/2}px solid transparent`;
-        confetti.style.borderBottom = `${size}px solid ${color}`;
-        confetti.style.background = 'none';
-    } else {
-        confetti.style.backgroundColor = color;
-    }
-    
-    confetti.style.opacity = Math.random() * 0.7 + 0.3; // Opacidad entre 0.3 y 1
-    
-    // Variables CSS personalizadas para la animación
-    confetti.style.setProperty('--drift-x', driftX);
-    confetti.style.setProperty('--rotation', rotation);
-    confetti.style.setProperty('--random-x', randomX);
-    
-    // Duración y retraso aleatorios
-    const duration = Math.random() * 3 + 5; // Entre 5 y 8 segundos
-    const delay = Math.random() * 2; // Hasta 2 segundos de retraso
-    
-    // Aplicar animación
-    confetti.style.animation = `fall ${duration}s linear ${delay}s forwards`;
-    
-    // Añadir confeti al contenedor
-    confettiContainer.appendChild(confetti);
-    
-    // Eliminar el confeti después de que termine la animación
-    setTimeout(() => {
-        if (confetti.parentNode === confettiContainer) {
-            confettiContainer.removeChild(confetti);
+    try {
+        const confettiContainer = document.querySelector('.confetti-container');
+        if (!confettiContainer) {
+            console.warn('No se encontró el contenedor de confetis');
+            return;
         }
-    }, (duration + delay) * 1000);
+        
+        const confetti = document.createElement('div');
+        
+        // Tipos de confeti (cuadrado, círculo o triángulo)
+        const types = ['square', 'circle', 'triangle'];
+        const type = types[Math.floor(Math.random() * types.length)];
+        confetti.className = `confetti ${type}`;
+        
+        // Posición aleatoria en la parte superior de la pantalla (incluyendo fuera de la vista)
+        const posX = (Math.random() * (window.innerWidth + 200)) - 100;
+        
+        // Tamaño aleatorio
+        const size = Math.random() * 19 + 16; // Entre 16px y 25px
+        
+        // Color aleatorio
+        const color = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+        
+        // Variables para la animación
+        const driftX = (Math.random() - 0.5) * 200; // Movimiento horizontal aleatorio
+        const rotation = (Math.random() - 0.5) * 360; // Rotación inicial entre -180 y 180 grados
+        const randomX = (Math.random() - 0.5) * 2; // Movimiento horizontal aleatorio adicional
     
-    return confetti;
+        // Establecer estilos
+        confetti.style.left = `${posX}px`;
+        confetti.style.top = '0';
+        confetti.style.width = type !== 'triangle' ? `${size}px` : '0';
+        confetti.style.height = type !== 'triangle' ? `${size}px` : '0';
+        
+        if (type === 'triangle') {
+            confetti.style.borderLeft = `${size/2}px solid transparent`;
+            confetti.style.borderRight = `${size/2}px solid transparent`;
+            confetti.style.borderBottom = `${size}px solid ${color}`;
+            confetti.style.background = 'none';
+        } else {
+            confetti.style.backgroundColor = color;
+        }
+        
+        confetti.style.opacity = Math.random() * 0.7 + 0.3; // Opacidad entre 0.3 y 1
+        
+        // Variables CSS personalizadas para la animación
+        confetti.style.setProperty('--drift-x', driftX);
+        confetti.style.setProperty('--rotation', rotation);
+        confetti.style.setProperty('--random-x', randomX);
+        
+        // Duración y retraso aleatorios
+        const duration = Math.random() * 3 + 5; // Entre 5 y 8 segundos
+        const delay = Math.random() * 2; // Hasta 2 segundos de retraso
+        
+        // Aplicar animación
+        confetti.style.animation = `fall ${duration}s linear ${delay}s forwards`;
+        
+        // Añadir confeti al contenedor
+        confettiContainer.appendChild(confetti);
+        
+        // Eliminar el confeti después de que termine la animación
+        setTimeout(() => {
+            if (confetti.parentNode === confettiContainer) {
+                confettiContainer.removeChild(confetti);
+            }
+        }, (duration + delay) * 1000);
+        
+        return confetti;
+    } catch (error) {
+        console.error('Error al crear confeti:', error);
+        return null;
+    }
 }
 
 // Función para mostrar los puntajes en el podio
@@ -133,37 +144,49 @@ function displayOtherScores(scores) {
 
 // Inicializar
 function init() {
-    // Mostrar puntajes en el podio (primeros 3)
-    const podiumScores = highScores.slice(0, 3);
-    displayPodiumScores(podiumScores);
-    
-    // Mostrar otros puntajes (del 4to en adelante, máximo 3 más)
-    const otherScores = highScores.slice(3, 6);
-    displayOtherScores(otherScores);
-    
-    // Crear confeti si hay puntajes
-    if (highScores.length > 0) {
-        // Crear ráfagas iniciales de confeti
-        for (let i = 0; i < 5; i++) {
-            setTimeout(() => createConfettiBurst(30), i * 800);
+    try {
+        // Mostrar puntajes en el podio (primeros 3)
+        const podiumScores = highScores.slice(0, 3);
+        displayPodiumScores(podiumScores);
+        
+        // Mostrar otros puntajes (del 4to en adelante, máximo 3 más)
+        const otherScores = highScores.slice(3, 6);
+        displayOtherScores(otherScores);
+        
+        // Verificar si el navegador es compatible con las animaciones
+        const supportsAnimations = 'requestAnimationFrame' in window;
+        
+        // Crear confeti si hay puntajes y el navegador es compatible
+        if (highScores.length > 0 && supportsAnimations) {
+            // Esperar un momento para asegurar que el DOM esté listo
+            setTimeout(() => {
+                // Crear ráfagas iniciales de confeti
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(() => createConfettiBurst(20), i * 1000);
+                }
+                
+                // Crear ráfagas continuas de confeti con menor frecuencia
+                const confettiInterval = setInterval(() => {
+                    if (Math.random() > 0.5) {
+                        createConfettiBurst(Math.floor(Math.random() * 10) + 5);
+                    }
+                }, 2000);
+                
+                // Detener la generación de confeti después de 20 segundos
+                setTimeout(() => {
+                    clearInterval(confettiInterval);
+                }, 20000);
+                
+                // Generar confeti adicional al hacer clic en cualquier parte
+                document.addEventListener('click', () => {
+                    createConfettiBurst(15);
+                });
+            }, 500);
+        } else if (!supportsAnimations) {
+            console.log('Animaciones no soportadas en este navegador');
         }
-        
-        // Crear ráfagas continuas de confeti
-        const confettiInterval = setInterval(() => {
-            if (Math.random() > 0.3) {
-                createConfettiBurst(Math.floor(Math.random() * 15) + 10);
-            }
-        }, 1500);
-        
-        // Detener la generación de confeti después de 30 segundos
-        setTimeout(() => {
-            clearInterval(confettiInterval);
-        }, 30000);
-        
-        // Generar confeti adicional al hacer clic en cualquier parte
-        document.addEventListener('click', () => {
-            createConfettiBurst(20);
-        });
+    } catch (error) {
+        console.error('Error en la inicialización de la página de puntuaciones:', error);
     }
 }
 

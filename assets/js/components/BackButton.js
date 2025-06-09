@@ -7,7 +7,7 @@ class BackButton extends window.Component {
     if (this.element.innerHTML.trim() === '') {
       this.element.innerHTML = `
         <button class="btn leave-game" data-ref="button">
-          <img src="/public/assets/images/back.svg" alt="Volver">
+          <img src="../../assets/images/back.svg" alt="Volver">
           Volver
         </button>
       `;
