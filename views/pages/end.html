@@ -42,8 +42,12 @@
         const basePath = isLocal ? '' : '/QuizApp';
         
         // Configurar el botón de inicio
-        document.getElementById('homeBtn').addEventListener('click', () => {
-            window.location.href = basePath + '/';
+        document.getElementById('homeBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            const isLocal = window.location.hostname === 'localhost' || 
+                         window.location.hostname === '127.0.0.1';
+            const basePath = isLocal ? '' : '/QuizApp';
+            window.location.href = window.location.origin + basePath + '/';
         });
 
         // Función para corregir rutas
