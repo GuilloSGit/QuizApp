@@ -15,7 +15,6 @@
 
 - 🎨 **Interfaz limpia y amigable**
 - ⚡ **Rendimiento óptimo** sin dependencias externas
-- 📱 **Diseño responsive** que funciona en cualquier dispositivo
 - 🎯 **Sistema de puntuación** con retroalimentación inmediata
 - 🔄 **Animaciones suaves** sin afectar el rendimiento
 - 🎨 **Temas de colores** cuidadosamente seleccionados
@@ -24,7 +23,7 @@
 
 > *"Claro, es posible hacerlo sin frameworks, sin librerías, pero cuesta un montón."*
 
-Este proyecto es un testimonio de lo que se puede lograr con JavaScript puro, HTML y CSS. Sin frameworks, sin dependencias, solo código nativo.
+Este proyecto es un testimonio de lo que se puede lograr en 4 horitas con JavaScript puro, HTML y CSS. Sin frameworks, sin dependencias, solo código nativo.
 
 ## 🚀 Tecnologías Utilizadas
 
