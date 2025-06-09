@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    const MAX_QUESTIONS = 1;
+    const MAX_QUESTIONS = 10;
     const CORRECT_BONUS = 10;
 
     // Usar window.PathUtils directamente o inicializar si no existe
