@@ -56,9 +56,6 @@ const PathUtils = {
     }
 };
 
-// Hacerlo accesible globalmente si es necesario
-if (window) {
+if (typeof window !== 'undefined') {
     window.PathUtils = PathUtils;
 }
-
-export default PathUtils;

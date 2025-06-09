@@ -1,5 +1,9 @@
-// Importar utilidades de rutas
-import PathUtils from './utils/pathUtils.js';
+// PathUtils está disponible globalmente
+const PathUtils = window.PathUtils || {
+    getAbsolutePath: (path) => path,
+    navigateTo: (path) => { window.location.href = path; },
+    getResourceUrl: (type, filename) => `assets/${type}/${filename}`
+};
 
 // Elementos del DOM
 const highScoresList = document.getElementById('otherScoresList');

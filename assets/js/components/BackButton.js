@@ -1,79 +1,122 @@
-// Importar utilidades de rutas
-import PathUtils from '../utils/pathUtils.js';
+// Utilidad para obtener la ruta base correcta
+function getBasePath() {
+  return (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') 
+    ? '' 
+    : '/QuizApp';
+}
+
+// Función para obtener la ruta completa
+function getFullPath(path) {
+  if (!path) return '/';
+  const basePath = getBasePath();
+  
+  // Si ya es una URL completa o comienza con http, devolverla tal cual
+  if (path.startsWith('http') || path.startsWith('//') || path.startsWith('data:')) {
+    return path;
+  }
+  
+  // Si la ruta ya comienza con el basePath, devolverla tal cual
+  if (basePath && path.startsWith(basePath)) {
+    return path;
+  }
+  
+  // Si la ruta comienza con /, agregar basePath
+  if (path.startsWith('/')) {
+    return basePath + path;
+  }
+  
+  // Para rutas relativas, agregar basePath si es necesario
+  return basePath + '/' + path;
+}
 
 /**
- * Componente de botón de volver
+ * Componente de botón de volver personalizado
  */
-class BackButton extends window.Component {
-  render() {
-    // Usar el contenido existente si ya hay algo en el elemento
-    if (this.element.innerHTML.trim() === '') {
-      this.element.innerHTML = `
-        <button class="btn leave-game" data-ref="button">
-          <img src="../../assets/images/back.svg" alt="Volver">
-          Volver
-        </button>
-      `;
-    }
-    return this.element.innerHTML;
+class BackButton extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  componentDidMount() {
-    this.button = this.element.querySelector('[data-ref="button"]');
+  connectedCallback() {
+    this.render();
+    
+    // Configurar el botón
+    this.button = this.shadowRoot.querySelector('button');
     if (this.button) {
-      this.handleClickBound = this.handleClick.bind(this);
-      this.button.addEventListener('click', this.handleClickBound);
+      this.button.addEventListener('click', this.handleClick);
     } else {
-      console.warn('No se encontró el botón en el componente BackButton');
+      console.warn('No se pudo encontrar el botón en el componente BackButton');
     }
   }
 
-  componentWillUnmount() {
-    if (this.button && this.handleClickBound) {
-      this.button.removeEventListener('click', this.handleClickBound);
+  disconnectedCallback() {
+    if (this.button) {
+      this.button.removeEventListener('click', this.handleClick);
     }
+  }
+
+  render() {
+    const backImagePath = getFullPath('assets/images/back.svg');
+    
+    this.shadowRoot.innerHTML = `
+      <style>
+        :host {
+          display: inline-block;
+        }
+        button {
+          background: none;
+          border: none;
+          color: white;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 1rem;
+          padding: 8px 16px;
+          border-radius: 4px;
+          transition: background-color 0.2s;
+        }
+        button:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+        img {
+          width: 20px;
+          height: 20px;
+        }
+      </style>
+      <button class="btn leave-game" style="margin: 0 0 1rem -1rem">
+        <img src="${backImagePath}" alt="Volver">
+        <span style="color:#000">Volver</span>
+      </button>
+    `;
   }
 
   handleClick(e) {
     e.preventDefault();
     e.stopPropagation();
     
-    // Si hay una acción de confirmación, manejarla
-    if (this.element.dataset.confirmAction === 'navigate') {
-      const href = this.element.dataset.href || '/';
-      const usePathUtils = this.element.hasAttribute('data-use-path-utils');
+    const href = this.getAttribute('href') || '/';
+    const confirmMessage = this.getAttribute('confirm-message');
+    
+    if (confirmMessage) {
+      // Crear y mostrar el diálogo de confirmación
+      const dialog = document.createElement('confirm-dialog');
+      dialog.setAttribute('title', this.getAttribute('confirm-title') || '¿Estás seguro?');
+      dialog.setAttribute('message', confirmMessage);
+      dialog.setAttribute('confirm-text', this.getAttribute('confirm-text') || 'Sí, salir');
+      dialog.setAttribute('cancel-text', this.getAttribute('cancel-text') || 'Cancelar');
       
-      // Si hay un diálogo de confirmación, mostrarlo
-      const dialogElement = document.getElementById('confirmDialog');
-      if (dialogElement && window.ConfirmDialog) {
-        const dialog = new window.ConfirmDialog({
-          title: this.element.dataset.confirmTitle || '¿Estás seguro?',
-          message: this.element.dataset.confirmMessage || '¿Quieres salir del juego?',
-          confirmText: this.element.dataset.confirmText || 'Sí, salir',
-          cancelText: this.element.dataset.cancelText || 'Cancelar',
-          onConfirm: () => {
-            if (usePathUtils) {
-              PathUtils.navigateTo(href);
-            } else {
-              window.location.href = href;
-            }
-          }
-        });
-        dialog.show();
-      } else {
-        // Si no hay diálogo, navegar directamente
-        if (usePathUtils) {
-          PathUtils.navigateTo(href);
-        } else {
-          window.location.href = href;
-        }
-      }
-    } else if (this.props.onClick) {
-      // Si hay un manejador de clic personalizado, usarlo
-      this.props.onClick(e);
-    } else if (this.element.href) {
-      // Navegar al enlace si no hay manejador personalizado
-      window.location.href = this.element.href;
+      dialog.addEventListener('confirm', () => {
+        window.location.href = getFullPath(href);
+      });
+      
+      document.body.appendChild(dialog);
+      dialog.show();
+    } else {
+      // Navegar directamente si no hay mensaje de confirmación
+      window.location.href = getFullPath(href);
     }
   }
 }
@@ -82,5 +125,3 @@ class BackButton extends window.Component {
 if (!customElements.get('back-button')) {
   customElements.define('back-button', BackButton);
 }
-
-export default BackButton;

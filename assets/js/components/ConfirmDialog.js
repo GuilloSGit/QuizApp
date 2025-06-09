@@ -191,23 +191,16 @@ class ConfirmDialog extends HTMLElement {
     this._handleCancel();
   }
 
+  // Métodos de compatibilidad
   handleConfirm() {
-    if (typeof this.props.onConfirm === 'function') {
-      this.props.onConfirm();
-    }
-    this.hide();
+    this._handleConfirm();
   }
 
   handleCancel() {
-    if (typeof this.props.onCancel === 'function') {
-      this.props.onCancel();
-    }
-    this.hide();
+    this._handleCancel();
   }
 }
 
 if (!customElements.get('confirm-dialog')) {
   customElements.define('confirm-dialog', ConfirmDialog);
 }
-
-export default ConfirmDialog;
