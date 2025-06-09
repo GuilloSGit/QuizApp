@@ -1,3 +1,6 @@
+// Importar utilidades de rutas
+import PathUtils from './utils/pathUtils.js';
+
 // Elementos del DOM
 const highScoresList = document.getElementById('otherScoresList');
 const confettiContainer = document.querySelector('.confetti-container');
@@ -195,4 +198,9 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
 } else {
     init();
+}
+
+// Hacer la función de navegación accesible globalmente
+if (window) {
+    window.navigateTo = PathUtils.navigateTo;
 }

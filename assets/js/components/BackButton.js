@@ -1,3 +1,6 @@
+// Importar utilidades de rutas
+import PathUtils from '../utils/pathUtils.js';
+
 /**
  * Componente de botón de volver
  */
@@ -35,35 +38,49 @@ class BackButton extends window.Component {
     e.preventDefault();
     e.stopPropagation();
     
-    // Buscar el diálogo de confirmación
-    const dialogElement = document.getElementById('confirmDialog');
-    let dialog = null;
-    
-    // Si encontramos el diálogo, mostrarlo
-    if (dialogElement && window.ConfirmDialog) {
-      // Si el diálogo tiene un método show, usarlo
-      if (dialogElement.show) {
-        dialogElement.show();
-      } 
-      // Si no, buscar la instancia del diálogo
-      else if (window.confirmDialogInstance) {
-        window.confirmDialogInstance.show();
+    // Si hay una acción de confirmación, manejarla
+    if (this.element.dataset.confirmAction === 'navigate') {
+      const href = this.element.dataset.href || '/';
+      const usePathUtils = this.element.hasAttribute('data-use-path-utils');
+      
+      // Si hay un diálogo de confirmación, mostrarlo
+      const dialogElement = document.getElementById('confirmDialog');
+      if (dialogElement && window.ConfirmDialog) {
+        const dialog = new window.ConfirmDialog({
+          title: this.element.dataset.confirmTitle || '¿Estás seguro?',
+          message: this.element.dataset.confirmMessage || '¿Quieres salir del juego?',
+          confirmText: this.element.dataset.confirmText || 'Sí, salir',
+          cancelText: this.element.dataset.cancelText || 'Cancelar',
+          onConfirm: () => {
+            if (usePathUtils) {
+              PathUtils.navigateTo(href);
+            } else {
+              window.location.href = href;
+            }
+          }
+        });
+        dialog.show();
       } else {
-        console.warn('No se pudo encontrar el método show en el diálogo');
+        // Si no hay diálogo, navegar directamente
+        if (usePathUtils) {
+          PathUtils.navigateTo(href);
+        } else {
+          window.location.href = href;
+        }
       }
-    } 
-    // Si no hay diálogo, ejecutar la acción directamente
-    else if (typeof this.props.onClick === 'function') {
-      this.props.onClick();
-    } else if (this.element.dataset.href) {
-      window.location.href = this.element.dataset.href;
+    } else if (this.props.onClick) {
+      // Si hay un manejador de clic personalizado, usarlo
+      this.props.onClick(e);
+    } else if (this.element.href) {
+      // Navegar al enlace si no hay manejador personalizado
+      window.location.href = this.element.href;
     }
   }
 }
 
-// Registrar el componente globalmente
-if (window) {
-  window.BackButton = BackButton;
+// Registrar el componente personalizado
+if (!customElements.get('back-button')) {
+  customElements.define('back-button', BackButton);
 }
 
 export default BackButton;

@@ -15,24 +15,25 @@
     <link rel="apple-touch-icon" href="../../assets/images/thinking.svg">
 
     <title>Preguntas rápidas</title>
-    <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/game.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <script type="module" src="../../assets/js/utils/pathUtils.js"></script>
+    <script type="module" src="../../assets/js/components/BackButton.js"></script>
+    <script type="module" src="../../assets/js/components/ConfirmDialog.js"></script>
 </head>
 
 <body>
     <div class="container">
         <div id="loader"></div>
         <div id="game" class="justify-center flex-column hidden">
-            <div id="back-home" data-component="back-button" data-href="../../index.html"></div>
-            <div id="confirmDialog" 
-                 data-component="confirm-dialog"
-                 data-title="¿Estás seguro que quieres salir?"
-                 data-message="Si sales ahora, perderás todo tu progreso y puntos."
-                 data-confirm-text="Sí, salir"
-                 data-cancel-text="Cancelar"
-                 data-confirm-action="navigate"
-                 data-href="../../index.html">
-            </div>
+            <back-button
+                id="back-home"
+                href="../../index.html"
+                confirm-message="Si sales ahora, perderás todo tu progreso y puntos."
+                confirm-title="¿Estás seguro que quieres salir?"
+                confirm-text="Sí, salir"
+                cancel-text="Cancelar">
+            </back-button>
             <div id="hud">
                 <div id="hud-item">
                     <p id="progressText" class="hud-prefix"></p>
@@ -68,14 +69,35 @@
             </div>
         </div>
     </div>
-    <script type="module" src="../../assets/js/app.js"></script>
-    <script type="module" src="../../assets/js/game.js"></script>
-    <script type="module">
-      document.addEventListener('DOMContentLoaded', () => {
-        if (window.initApp && typeof window.initApp === 'function') {
-          window.initApp();
-        }
-      });
+    <script src="../../assets/js/components/BackButton.js" type="module"></script>
+    <script src="../../assets/js/components/ConfirmDialog.js"></script>
+    <script src="../../assets/js/game.js" type="module"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const basePath = window.location.hostname === 'localhost' || 
+                          window.location.hostname === '127.0.0.1' ? '' : '/QuizApp';
+            
+            function updateElementPaths(selector, attr) {
+                document.querySelectorAll(selector).forEach(element => {
+                    const value = element.getAttribute(attr);
+                    if (value && value.startsWith('../../')) {
+                        element.setAttribute(attr, value.replace('../../', `${basePath}/`));
+                    }
+                });
+            }
+
+            updateElementPaths('link[rel="stylesheet"]', 'href');
+            updateElementPaths('script[src^="../../"]', 'src');
+            updateElementPaths('img[src^="../../"]', 'src');
+            
+            updateElementPaths('[data-href^="../../"]', 'data-href');
+            
+            setTimeout(() => {
+                if (window.initApp && typeof window.initApp === 'function') {
+                    window.initApp();
+                }
+            }, 100);
+        });
     </script>
 </body>
 

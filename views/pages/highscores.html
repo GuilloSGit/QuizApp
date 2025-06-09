@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/highscores.css">
+    <script type="module" src="../../assets/js/utils/pathUtils.js"></script>
 
     <link rel="icon" type="image/svg+xml" href="../../assets/images/thinking.svg">
     <link rel="apple-touch-icon" href="../../assets/images/thinking.svg">
@@ -17,7 +18,7 @@
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#56a5eb">
 
-    <title>Ganadores</title>
+    <title>Récords - Juego de Preguntas</title>
 </head>
 
 <body>
@@ -63,14 +64,38 @@
                 </ul>
             </div>
             
-            <a href="../../index.html" class="btn">Inicio</a>
+            <a href="/" class="btn" data-confirm-action="navigate" data-href="/" data-use-path-utils="true">Inicio</a>
             
             <!-- Elementos decorativos de papelitos -->
             <div class="confetti-container"></div>
         </div>
     </div>
     <div id="custom-cursor"></div>
-    <script src="../../assets/js/highscores.js"></script>
+    <script src="../../assets/js/highscores.js" type="module"></script>
+    <script>
+        // Asegurar que las rutas funcionen correctamente
+        document.addEventListener('DOMContentLoaded', () => {
+            const basePath = window.location.hostname === 'localhost' || 
+                          window.location.hostname === '127.0.0.1' ? '' : '/QuizApp';
+            
+            // Actualizar rutas de recursos
+            document.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
+                if (link.href.includes('../../assets/')) {
+                    link.href = link.href.replace('../../', `${basePath}/`);
+                }
+            });
+            
+            // Actualizar rutas de scripts
+            document.querySelectorAll('script[src^="../../assets/"]').forEach(script => {
+                script.src = script.src.replace('../../', `${basePath}/`);
+            });
+            
+            // Actualizar rutas de imágenes
+            document.querySelectorAll('img[src^="../../assets/"]').forEach(img => {
+                img.src = img.src.replace('../../', `${basePath}/`);
+            });
+        });
+    </script>
 </body>
 
 </html>

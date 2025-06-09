@@ -1,29 +1,22 @@
-const username = document.getElementById('username')
-const saveScoreBtn = document.getElementById('saveScoreBtn')
-const finalScore = document.getElementById('finalScore')
-const mostRecentScore = localStorage.getItem('mostRecentScore')
-
-const highScores = JSON.parse(localStorage.getItem('highScores')) || []
-
-const MAX_HIGH_SCORES = 5
-
-
-finalScore.innerText = mostRecentScore
-
-username.addEventListener('keyup', () => {
-    saveScoreBtn.disabled = !username.value;
-})
-saveHighScore = e => {
-    e.preventDefault();
-
-    const score = {
-        score: mostRecentScore,
-        name: username.value
+// Mostrar la puntuación final cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', () => {
+    const finalScore = document.getElementById('finalScore');
+    if (finalScore) {
+        const mostRecentScore = localStorage.getItem('mostRecentScore') || '0';
+        finalScore.textContent = mostRecentScore;
     }
-    highScores.push(score)
-    highScores.sort((a, b) => b.score - a.score)
-    highScores.splice(5)
-
-    localStorage.setItem('highScores', JSON.stringify(highScores))
-    window.location.assign("/views/pages/highscores.html")
-}
+    
+    // Configurar el botón de guardar
+    const usernameInput = document.getElementById('username');
+    const saveButton = document.getElementById('saveScoreBtn');
+    
+    if (usernameInput && saveButton) {
+        // Deshabilitar el botón inicialmente
+        saveButton.disabled = true;
+        
+        // Habilitar/deshabilitar el botón según si hay texto
+        usernameInput.addEventListener('input', () => {
+            saveButton.disabled = !usernameInput.value.trim();
+        });
+    }
+});

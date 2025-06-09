@@ -17,14 +17,25 @@
 
     <title>Juego de opciones</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <script type="module" src="assets/js/utils/pathUtils.js"></script>
 </head>
 
 <body>
     <div class="container">
         <div id="home" class="flex-center flex-column">
             <h1>Juego de preguntas rápidas</h1>
-            <a class="btn" href="views/pages/game.html">Jugar</a>
-            <a class="btn" href="views/pages/highscores.html">Récords</a>
+            <a class="btn" href="views/pages/game.html" id="playBtn">Jugar</a>
+            <a class="btn" href="views/pages/highscores.html" id="scoresBtn">Récords</a>
+            <script>
+                // Asegurar que las rutas funcionen correctamente
+                document.addEventListener('DOMContentLoaded', () => {
+                    const basePath = window.location.hostname === 'localhost' || 
+                                  window.location.hostname === '127.0.0.1' ? '' : '/QuizApp';
+                    
+                    document.getElementById('playBtn').href = `${basePath}/views/pages/game.html`;
+                    document.getElementById('scoresBtn').href = `${basePath}/views/pages/highscores.html`;
+                });
+            </script>
         </div>
     </div>
 </body>

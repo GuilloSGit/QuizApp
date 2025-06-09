@@ -1,5 +1,7 @@
-const MAX_QUESTIONS = 1;
+const MAX_QUESTIONS = 10;
 const CORRECT_BONUS = 10;
+
+import PathUtils from './utils/pathUtils.js';
 
 const question = document.getElementById('question');
 const choices = Array.from(document.getElementsByClassName("choice-text"));
@@ -16,12 +18,8 @@ let questionCounter = 0;
 let availableQuestions = [];
 let questions = [];
 
-function initGame() {
-    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-    const basePath = isLocal ? '' : '/QuizApp';
-    const questionsPath = isLocal ? 
-        '../../assets/data/questions.json' : 
-        `${basePath}/assets/data/questions.json`;
+async function initGame() {
+    const questionsPath = PathUtils.getResourceUrl('data', 'questions.json');
     
     fetch(questionsPath)
         .then(res => {
@@ -40,7 +38,6 @@ function initGame() {
             errorMessage.className = 'error-message';
             errorMessage.textContent = 'Error al cargar las preguntas. Por favor, recarga la página.';
             document.body.appendChild(errorMessage);
-            // Ocultar el loader si hay un error
             const loader = document.getElementById('loader');
             if (loader) loader.classList.add('hidden');
         });
@@ -58,12 +55,7 @@ function startGame() {
 function getNewQuestion() {
     if (availableQuestions.length === 0 || questionCounter >= MAX_QUESTIONS) {
         localStorage.setItem('mostRecentScore', score);
-        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-        const basePath = isLocal ? '' : '/QuizApp';
-        const endPagePath = isLocal ? 
-            '/views/pages/end.html' : 
-            `${basePath}/views/pages/end.html`;
-        return window.location.assign(endPagePath);
+        return PathUtils.navigateTo('views/pages/end.html');
     }
 
     questionCounter++;
@@ -137,9 +129,34 @@ function incrementScore(points) {
     score += points;
     scoreText.innerText = score;
 }
+function setupBackButton() {
+  const backButton = document.querySelector('back-button');
+  if (backButton) {
+    backButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      const dialog = document.createElement('confirm-dialog');
+      dialog.setAttribute('title', '¿Estás seguro que quieres salir?');
+      dialog.setAttribute('message', 'Si sales ahora, perderás todo tu progreso y puntos.');
+      dialog.setAttribute('confirm-text', 'Sí, salir');
+      dialog.setAttribute('cancel-text', 'Cancelar');
+      
+      dialog.addEventListener('confirm', () => {
+        const homePath = window.location.hostname === 'localhost' || 
+                       window.location.hostname === '127.0.0.1' ? '/' : '/QuizApp/';
+        window.location.href = homePath;
+      });
+      
+      document.body.appendChild(dialog);
+      dialog.show();
+    });
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    setupEventListeners();
-    initGame();
+  setupBackButton();
+  setupEventListeners();
+  initGame();
 });
 
 window.startGame = startGame;

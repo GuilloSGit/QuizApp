@@ -5,24 +5,196 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../assets/css/style.css">
-    <title>Felicitaciones</title>
+    <meta name="description" content="Juego de preguntas rápidas - Puntuación final">
+    <meta name="theme-color" content="#56a5eb">
+    
+    <title>Felicitaciones - Juego de Preguntas</title>
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/end.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/assets/images/thinking.svg">
+    <link rel="apple-touch-icon" href="/assets/images/thinking.svg">
+    
+    <!-- Utilidades de rutas -->
+    <script type="module" src="/assets/js/utils/pathUtils.js"></script>
 </head>
 
 <body>
     <div class="container">
         <div id="end" class="flex-center flex-column">
             <h1 id="finalScore">0</h1>
-            <form>
+            <form id="saveScoreForm">
                 <input type="text" name="username" id="username" placeholder="Nombre del usuario">
-                <button type="submit" class="btn" id="saveScoreBtn" onclick="saveHighScore(event)"
-                    disabled>Guardar</button>
+                <button type="submit" class="btn" id="saveScoreBtn" disabled>Guardar</button>
             </form>
-            <a class="btn" href="game.html">Jugar</a>
-            <a class="btn" href="../../index.html">Inicio</a>
+            <a class="btn" href="/views/pages/game.html" id="playAgainBtn">Jugar de nuevo</a>
+            <a class="btn" href="/" id="homeBtn">Inicio</a>
         </div>
     </div>
-    <script src="../../assets/js/end.js"></script> 
+    <!-- Script para manejo de rutas -->
+    <script type="module">
+        // Configurar rutas base
+        const isLocal = window.location.hostname === 'localhost' || 
+                      window.location.hostname === '127.0.0.1';
+        const basePath = isLocal ? '' : '/QuizApp';
+        
+        // Función para corregir rutas
+        function fixPath(path) {
+            if (path.startsWith('http') || path.startsWith('//')) {
+                return path;
+            }
+            // Si la ruta ya tiene el basePath, no hacer nada
+            if (path.startsWith(basePath)) {
+                return path;
+            }
+            // Si la ruta comienza con /, agregar basePath
+            if (path.startsWith('/')) {
+                return basePath + path;
+            }
+            // Para rutas relativas, devolver tal cual (el navegador las resolverá)
+            return path;
+        }
+        
+        // Corregir rutas de estilos
+        document.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
+            link.href = fixPath(link.getAttribute('href'));
+        });
+        
+        // Corregir rutas de scripts (excepto el actual)
+        document.querySelectorAll('script[src]').forEach(script => {
+            if (script.src.includes('end.html')) return; // No modificar este script
+            script.src = fixPath(script.getAttribute('src'));
+        });
+        
+        // Corregir rutas de imágenes
+        document.querySelectorAll('img[src]').forEach(img => {
+            img.src = fixPath(img.getAttribute('src'));
+        });
+        
+        // Configurar botones de navegación
+        document.addEventListener('DOMContentLoaded', () => {
+            const playAgainBtn = document.getElementById('playAgainBtn');
+            const homeBtn = document.getElementById('homeBtn');
+            
+            if (playAgainBtn) {
+                playAgainBtn.href = fixPath('/views/pages/game.html');
+            }
+            
+            if (homeBtn) {
+                homeBtn.href = fixPath('/');
+            }
+            
+            // Asegurar que el botón de guardar esté deshabilitado inicialmente
+            const saveScoreBtn = document.getElementById('saveScoreBtn');
+            if (saveScoreBtn) {
+                saveScoreBtn.disabled = true;
+            }
+        });
+    </script>
+    
+    <!-- Script para manejar el formulario y navegación -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Configuración de rutas base
+            const isLocal = window.location.hostname === 'localhost' || 
+                          window.location.hostname === '127.0.0.1';
+            const basePath = isLocal ? '' : '/QuizApp';
+            
+            // Función para obtener la ruta completa
+            function getFullPath(path) {
+                if (path.startsWith('http') || path.startsWith('//') || path.startsWith('data:')) {
+                    return path;
+                }
+                // Si la ruta ya comienza con basePath, devolverla tal cual
+                if (path.startsWith(basePath)) {
+                    return path;
+                }
+                // Si la ruta comienza con /, agregar basePath
+                if (path.startsWith('/')) {
+                    return basePath + path;
+                }
+                // Para rutas relativas, devolver tal cual
+                return path;
+            }
+
+            // Configurar el formulario
+            const form = document.getElementById('saveScoreForm');
+            const usernameInput = document.getElementById('username');
+            const saveButton = document.getElementById('saveScoreBtn');
+            
+            if (form) {
+                form.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    
+                    if (!usernameInput || !usernameInput.value.trim()) {
+                        alert('Por favor ingresa tu nombre');
+                        return;
+                    }
+                    
+                    try {
+                        // Obtener puntuación más reciente
+                        const mostRecentScore = localStorage.getItem('mostRecentScore') || '0';
+                        
+                        // Obtener puntuaciones existentes
+                        const highScores = JSON.parse(localStorage.getItem('highScores') || '[]');
+                        
+                        // Agregar nueva puntuación
+                        highScores.push({
+                            score: mostRecentScore,
+                            name: usernameInput.value.trim(),
+                            date: new Date().toISOString()
+                        });
+                        
+                        // Ordenar y guardar
+                        highScores.sort((a, b) => b.score - a.score || new Date(b.date) - new Date(a.date));
+                        const topScores = highScores.slice(0, 5);
+                        localStorage.setItem('highScores', JSON.stringify(topScores));
+                        
+                        // Redirigir a la página de puntuaciones
+                        window.location.href = getFullPath('/views/pages/highscores.html');
+                    } catch (error) {
+                        console.error('Error al guardar la puntuación:', error);
+                        alert('Ocurrió un error al guardar tu puntuación.');
+                    }
+                });
+            }
+            
+            // Configurar validación del campo de nombre de usuario
+            if (usernameInput && saveButton) {
+                usernameInput.addEventListener('input', () => {
+                    saveButton.disabled = !usernameInput.value.trim();
+                });
+                saveButton.disabled = true;
+            }
+            
+            // Configurar botones de navegación
+            const playAgainBtn = document.getElementById('playAgainBtn');
+            const homeBtn = document.getElementById('homeBtn');
+            
+            if (playAgainBtn) playAgainBtn.href = getFullPath('/views/pages/game.html');
+            if (homeBtn) homeBtn.href = getFullPath('/');
+            
+            // Corregir rutas de recursos
+            document.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
+                link.href = getFullPath(link.getAttribute('href'));
+            });
+            
+            document.querySelectorAll('script[src]').forEach(script => {
+                if (script.src.includes('end.html')) return;
+                script.src = getFullPath(script.getAttribute('src'));
+            });
+            
+            document.querySelectorAll('img[src]').forEach(img => {
+                img.src = getFullPath(img.getAttribute('src'));
+            });
+        });
+    </script>
+    
+    <!-- Cargar el script de la aplicación -->
+    <script type="module" src="/assets/js/end.js"></script>
 </body>
 
 </html>
